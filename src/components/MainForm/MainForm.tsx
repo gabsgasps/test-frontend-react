@@ -49,6 +49,7 @@ export default function MainForm({ email }: { email?: string }) {
       name: user.name,
       phone: user.phoneFormatted
     })
+    form.trigger()
   }, [form, email])
 
   useEffect(() => {
