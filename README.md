@@ -1,20 +1,35 @@
-# Front-end Test
+## Front-end Test
 
-This project is using localStorage to persist a list of data, contains two pages "/" - in the home has a list of users and in the route "/criar-ou-editar" has a form to create ("/criar-ou-editar/[email]" it's a plus page to edit each user)
+This is a simple CRUD application for managing a user list using `localStorage`. It includes a form with validation for Brazilian-specific fields (CPF and phone number), unit tests for the core logic, and a styled UI using MUI.
 
-In [StorageManager](./services/storage-manager.ts) has a structure that isolute common operations like like read, edit, delete are using a Map() a feature from ES6+ each is possible select a key and value for each user, which could be used for another services similar to [UserService](./services/user.service.ts).
+### Overview
 
-Using StorageManager:
+There are two main routes:
+
+- `/`: Displays the list of users.
+- `/criar-ou-editar`: Contains the form to create or edit users.
+- (plus) `/criar-ou-editar/[email]`: A dynamic route used for editing a specific user by their email.
+
+### Using StorageManager
+
+[StorageManager](./services/storage-manager.ts) abstracts common operations like read, edit, and delete using a Map() allowing efficient data management, which could be used for another services similar to [UserService](./services/user.service.ts).
+
+To manage user data via `localStorage`, we use a class called `StorageManager`, which wraps the data in a `Map()` and allows common CRUD operations. It requires a unique key to identify each object (in this case, the user's email):
 
 ```ts
-// PROPERTY_TO_FAKE_PRIMARY_KEY - required to have a key to identify easly each data to Map() makes a better way to manage queries
-const PROPERTY_TO_KEY_FAKE_PRIMARY_KEY = 'email' // email is name of the one property of the list
+const PROPERTY_TO_KEY_FAKE_PRIMARY_KEY = 'email'
 new StorageManager(LOCALSTORAGE_KEY, PROPERTY_TO_KEY_FAKE_PRIMARY_KEY)
 ```
 
-Was used MUI because of the versality and easy to config, the theme config is in [Theme](./src/theme.ts). React Form Hook with Zod are being used to forms, and to validate CPF (Brazilian document) and Phone (Brazilian in pattern) was used Vanilla masks the smallest lib to makes this checks
+#### **UI & Validations**
 
-Uni testing are implementated for verify how is working StorageManager, are important tests case to validates the integrity of the core of the app [see tests](./services/__tests__)
+The UI is built with Material UI (MUI) for its flexibility and easy customization. The theme configuration is located in [Theme](./src/theme.ts).
+
+Forms are handled using React Form Hook with Zod are being used to forms, was used the "vanilla-masker" library to validate and format Brazilian CPF and phone number inputs efficiently.
+
+#### **Unit testing**
+
+Unit testing are implementated for verify how is working StorageManager, are important tests case to validates the integrity of the core of the app [see tests](./services/__tests__)
 
 ## Installing / Getting started
 
@@ -77,14 +92,10 @@ Test utilities include:
 
 ## Style guide
 
-Explain your code style and show how to check it.
-
-```shell
-Components:
-    /ComponentName/ComponentName.tsx - naming in PascalCase
-Not Components:
-    /util/util.ts - naming in lower case or kebab-case
-```
+- **Components** should be in PascalCase:  
+  `/components/UserCard/UserCard.tsx`
+- **Utilities and helpers** in kebab-case or lower case:  
+  `/utils/cpf-validator.ts`
 
 ## Licensing
 
