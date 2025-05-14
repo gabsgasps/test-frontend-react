@@ -1,6 +1,7 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest'
 import { UserInterface } from '../user'
 import { UserService } from '../user.service'
+import { ErrorsType } from '@/utils/errors-type'
 
 const localStorageMock = (() => {
   let store: Record<string, string> = {}
@@ -37,8 +38,8 @@ describe('UserService', () => {
     userService = new UserService()
   })
 
-  it('should create a new user', () => {
-    const user = userService.createUser(mockUser)
+  it('should create a new user', async () => {
+    const user = await userService.createUser(mockUser)
     expect(user.email).toBe(mockUser.email)
     expect(user.name).toBe(mockUser.name)
   })
@@ -58,13 +59,13 @@ describe('UserService', () => {
 
   it('should throw an error if user does not exist', () => {
     expect(() => userService.readUser('nonexistent@email.com')).toThrow(
-      'user_not_found'
+      ErrorsType.USER_NOT_FOUND
     )
   })
 
-  it('should edit an existing user', () => {
-    userService.createUser(mockUser)
-    const updated = userService.editUser(mockUser.email, {
+  it('should edit an existing user', async () => {
+    await userService.createUser(mockUser)
+    const updated = await userService.editUser(mockUser.email, {
       ...mockUser,
       name: 'Updated Name'
     })
@@ -75,13 +76,15 @@ describe('UserService', () => {
   it('should delete an existing user', () => {
     userService.createUser(mockUser)
     const result = userService.deleteUser(mockUser.email)
-    expect(result.success).toBe('User removed successfully!')
-    expect(() => userService.readUser(mockUser.email)).toThrow('user_not_found')
+    expect(result.success).toBe(true)
+    expect(() => userService.readUser(mockUser.email)).toThrow(
+      ErrorsType.USER_NOT_FOUND
+    )
   })
 
   it('should throw an error when deleting a nonexistent user', () => {
     expect(() => userService.deleteUser('nonexistent@email.com')).toThrow(
-      'user_not_found'
+      ErrorsType.USER_NOT_FOUND
     )
   })
 })
