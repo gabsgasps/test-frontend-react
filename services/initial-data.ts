@@ -1,0 +1,24 @@
+import { UserInterface } from './user'
+
+const initialData: Array<UserInterface> = [
+  {
+    name: 'Joao da Silva',
+    cpf: '26899337649',
+    phone: '4233335555',
+    email: 'joao@joaosilva.com.br'
+  },
+  {
+    name: 'Maria Antonieta',
+    cpf: '65138896180',
+    phone: '1255553333',
+    email: 'maria@mariaantonieta.com.br'
+  },
+  {
+    name: 'Luiz Souza',
+    cpf: '32420496329',
+    phone: '1144446666',
+    email: 'luiz@luizsouza.com.br'
+  }
+]
+
+export { initialData }
