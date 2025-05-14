@@ -1,7 +1,7 @@
 'use client'
 
 import { ErrorsType } from '@/utils/errors-type'
-import { StoreManager } from './store-manager'
+import { StorageManager } from './storage-manager'
 import { UserInterface, User } from './user'
 import { sleep } from '@/utils/sleep'
 import { initialData } from './initial-data'
@@ -9,9 +9,9 @@ import { initialData } from './initial-data'
 export const STORAGE_KEY = 'USERS'
 
 export class UserService {
-  storage: StoreManager<UserInterface>
+  storage: StorageManager<UserInterface>
   constructor() {
-    this.storage = new StoreManager(STORAGE_KEY, 'email')
+    this.storage = new StorageManager(STORAGE_KEY, 'email')
     if (typeof window !== 'undefined') {
       const itemsFromStorage = this.storage.getItems()
 
@@ -35,7 +35,7 @@ export class UserService {
       throw new Error(ErrorsType.USER_EXISTS)
     }
 
-    const data = this.storage.storeData(user)
+    const data = this.storage.storageData(user)
     await sleep()
     return new User(data)
   }

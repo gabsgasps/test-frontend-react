@@ -4,18 +4,18 @@ import { UserService } from '../user.service'
 import { ErrorsType } from '@/utils/errors-type'
 
 const localStorageMock = (() => {
-  let store: Record<string, string> = {}
+  let storage: Record<string, string> = {}
 
   return {
-    getItem: vi.fn((key: string) => store[key] || null),
+    getItem: vi.fn((key: string) => storage[key] || null),
     setItem: vi.fn((key: string, value: string) => {
-      store[key] = value
+      storage[key] = value
     }),
     removeItem: vi.fn((key: string) => {
-      delete store[key]
+      delete storage[key]
     }),
     clear: vi.fn(() => {
-      store = {}
+      storage = {}
     })
   }
 })()

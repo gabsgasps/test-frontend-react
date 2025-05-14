@@ -1,17 +1,26 @@
-# Teste de Front-end
+# Front-end Test
 
-> Additional information or tag line
+This project is using localStorage to persist a list of data, contains two pages "/" - in the home has a list of users and in the route "/criar-ou-editar" has a form to create ("/criar-ou-editar/[email]" it's a plus page to edit each user)
 
-A brief description of your project, what it is used for.
+In [StorageManager](./services/storage-manager.ts) has a structure that isolute common operations like like read, edit, delete are using a Map() a feature from ES6+ each is possible select a key and value for each user, which could be used for another services similar to [UserService](./services/user.service.ts).
+
+Using StorageManager:
+
+```ts
+// PROPERTY_TO_FAKE_PRIMARY_KEY - required to have a key to identify easly each data to Map() makes a better way to manage queries
+const PROPERTY_TO_KEY_FAKE_PRIMARY_KEY = 'email' // email is name of the one property of the list
+new StorageManager(LOCALSTORAGE_KEY, PROPERTY_TO_KEY_FAKE_PRIMARY_KEY)
+```
+
+Was used MUI because of the versality and easy to config, the theme config is in [Theme](./src/theme.ts). React Form Hook with Zod are being used to forms, and to validate CPF (Brazilian document) and Phone (Brazilian in pattern) was used Vanilla masks the smallest lib to makes this checks
+
+Uni testing are implementated for verify how is working StorageManager, are important tests case to validates the integrity of the core of the app [see tests](./services/__tests__)
 
 ## Installing / Getting started
 
-A quick introduction of the minimal setup you need to get a hello world up &
-running.
-
 ```shell
-npm install
-npm run dev
+pnpm install
+pnpm run dev
 ```
 
 This installs all dependencies and starts the local development server.
@@ -20,25 +29,22 @@ This installs all dependencies and starts the local development server.
 
 ### Built With
 
-- React
+- React/NextJS
 - TypeScript
-- NextJS
-- Vite
-- Vitest
+- MUI (Material UI)
+- React Form Hook
+- Zod
 
 ### Prerequisites
 
-- [Node.js](https://nodejs.org/)
-- [npm](https://www.npmjs.com/) or [pnpm](https://pnpm.io/)
+- [Node.js](https://nodejs.org/) (18.17+)
+- [npm](https://www.npmjs.com/) (9+) or [pnpm](https://pnpm.io/) (9+)
 - Git
 
 ### Setting up Dev
 
-Here's a brief intro about what a developer must do in order to start developing
-the project further:
-
 ```shell
-git clone https://github.com/your/your-project.git
+git clone https://github.com/gabsgasps/test-frontend-react
 cd your-project/
 pnpm install
 ```
@@ -47,33 +53,11 @@ This clones the repository, navigates into the project folder, and installs depe
 
 ### Building
 
-If your project needs some additional steps for the developer to build the
-project after some code changes, state them here. For example:
-
 ```shell
 pnpm run build
 ```
 
-This compiles the TypeScript and bundles the project for production using Vite.
-
-### Deploying / Publishing
-
-To publish or deploy a new version:
-
-```shell
-pnpm run deploy
-```
-
-This command should handle deploying your project to the target server or platform.
-
-## Versioning
-
-We can maybe use [SemVer](http://semver.org/) for versioning.  
-For the versions available, see the [tags on this repository](/tags).
-
-## Configuration
-
-Here you should write what are all of the configurations a user can enter when using the project.
+This compiles the TypeScript and bundles the project for production using Turbopack.
 
 ## Tests
 
@@ -85,21 +69,22 @@ To run the tests:
 pnpm run test
 ```
 
-These tests ensure that key parts of the application logic behave as expected.
+Test utilities include:
+
+- `@testing-library/react`
+- `@testing-library/dom`
+- `jsdom`
 
 ## Style guide
 
 Explain your code style and show how to check it.
 
-## API Reference
-
-If the API is external, link to API documentation.  
-If not, describe your API including authentication methods and endpoints with their required parameters.
-
-## Database
-
-Explain what database (and version) has been used. Provide download links.  
-Document your database design, schemas, and relationships here.
+```shell
+Components:
+    /ComponentName/ComponentName.tsx - naming in PascalCase
+Not Components:
+    /util/util.ts - naming in lower case or kebab-case
+```
 
 ## Licensing
 

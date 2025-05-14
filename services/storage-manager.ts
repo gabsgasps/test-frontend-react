@@ -1,6 +1,6 @@
 'use client'
 
-export class StoreManager<T> {
+export class StorageManager<T> {
   private storagekey: string
   private fakePrimaryKey: keyof T
   private mapOfItems: Map<T[keyof T], T>
@@ -15,7 +15,7 @@ export class StoreManager<T> {
     }
   }
 
-  storeData(data: T): T {
+  storageData(data: T): T {
     this.mapOfItems.set(data[this.fakePrimaryKey], data)
     this.saveData([...this.mapOfItems.values()])
     return data

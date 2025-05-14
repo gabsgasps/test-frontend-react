@@ -2,6 +2,17 @@
 import { createTheme } from '@mui/material/styles'
 import { Roboto } from 'next/font/google'
 
+const colors = {
+  textPrimary: '#333333',
+  textSecondary: '#333333',
+  error: '#eb4a46',
+  primaryMain: '#00c8b3',
+  primaryContrast: '#ffffff',
+  disabledBg: '#f6f6f6',
+  disabledText: '#dddcdc',
+  borderDefault: '#efeeed'
+}
+
 const roboto = Roboto({
   weight: ['300', '400', '500', '700'],
   subsets: ['latin'],
@@ -18,38 +29,38 @@ const theme = createTheme({
   },
   palette: {
     text: {
-      primary: '#333333',
-      secondary: '#333333'
+      primary: colors.textPrimary,
+      secondary: colors.textSecondary
     },
     error: {
-      main: '#eb4a46'
+      main: colors.error
     },
     primary: {
-      main: '#00c8b3',
-      contrastText: '#ffffff'
+      main: colors.primaryMain,
+      contrastText: colors.primaryContrast
     },
     action: {
-      disabledBackground: '#f6f6f6',
-      disabled: '#dddcdc'
+      disabledBackground: colors.disabledBg,
+      disabled: colors.disabledText
     }
   },
   components: {
     MuiButton: {
       styleOverrides: {
-        colorPrimary: '#00c8b3',
+        colorPrimary: colors.primaryMain,
         root: {
           textTransform: 'none',
           borderRadius: 24,
           '&:hover:not(.MuiButton-outlined)': {
             opacity: 0.7,
-            backgroundColor: '#00c8b3'
+            backgroundColor: colors.primaryMain
           },
           '&.Mui-disabled': {
-            backgroundColor: '#f6f6f6',
-            color: '#dddcdc'
+            backgroundColor: colors.disabledBg,
+            color: colors.disabledText
           },
           '&.MuiButton-containedPrimary&.MuiButton-loading': {
-            backgroundColor: '#00c8b3',
+            backgroundColor: colors.primaryMain,
             color: 'transparent'
           }
         }
@@ -58,22 +69,22 @@ const theme = createTheme({
     MuiInputBase: {
       styleOverrides: {
         root: {
-          color: '#333333',
+          color: colors.textPrimary,
           fontWeight: 600,
           '&:not(&.Mui-error)::after': {
-            borderBottom: '2px solid #efeeed!important'
+            borderBottom: `2px solid ${colors.borderDefault}!important`
           },
           '&:not(&.Mui-error)::before': {
-            borderBottom: '1px solid #efeeed!important'
+            borderBottom: `1px solid ${colors.borderDefault}!important`
           },
           '&:focus-within': {
-            color: '#333333'
+            color: colors.textPrimary
           },
           '&.Mui-error': {
-            borderBottom: '1px solid #eb4a46'
+            borderBottom: `1px solid ${colors.error}`
           },
           '&.Mui-focused': {
-            borderColor: '#efeeed'
+            borderColor: colors.borderDefault
           }
         }
       }
@@ -81,16 +92,16 @@ const theme = createTheme({
     MuiInputLabel: {
       styleOverrides: {
         root: {
-          color: '#efeeed',
+          color: colors.borderDefault,
           '&.Mui-focused': {
-            color: '#333333'
+            color: colors.textPrimary
           }
         }
       }
     },
     MuiFormHelperText: {
       styleOverrides: {
-        root: { color: '#eb4a46' }
+        root: { color: colors.error }
       }
     }
   }

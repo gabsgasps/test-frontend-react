@@ -18,7 +18,7 @@ import { Controller, FormProvider, useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { UserInterface } from '../../../services/user'
 import { userService } from '../../../services/user.service'
-import { createUserSchema } from './createUserSchema'
+import { createUserSchema } from './create-user-schema'
 import { sleep } from '@/utils/sleep'
 
 export default function MainForm({ email }: { email?: string }) {
